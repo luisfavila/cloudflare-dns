@@ -1,0 +1,38 @@
+{
+	"extends": "airbnb",
+	"parserOptions": {
+		"ecmaVersion": 2019,
+		"ecmaFeatures": {
+            "experimentalObjectRestSpread": true
+        }
+	},
+	"rules": {
+		"indent": ["error", "tab", {
+			"SwitchCase": 1,
+			"VariableDeclarator": 1
+		}],
+		"semi": ["error", "never"],
+		"comma-dangle": ["error", "never"],
+		"no-console": "off",
+		"no-mixed-spaces-and-tabs": "error",
+		"no-tabs": 0,
+		"max-len": ["error", 120],
+		"object-curly-spacing": ["error", "always", {"objectsInObjects": false, "arraysInObjects": false }],
+		"no-restricted-syntax": [
+			"error",
+			{
+			  "selector": "LabeledStatement",
+			  "message": "Labels are a form of GOTO; using them makes code confusing and hard to maintain and understand."
+			},
+			{
+			  "selector": "WithStatement",
+			  "message": "`with` is disallowed in strict mode because it makes code impossible to predict and optimize."
+			}
+		],
+		"no-param-reassign": "off",
+		"no-use-before-define": "off"
+	},
+	"plugins": [
+        "json-light"
+    ]
+}
