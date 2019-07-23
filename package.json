@@ -11,7 +11,7 @@
 		"test": "node -r esm test.js"
 	},
 	"dependencies": {
-		"cloudflare": "../node-cloudflare",
+		"cloudflare": "luisfavila/node-cloudflare#master",
 		"esm": "^3.2.25"
 	},
 	"devDependencies": {
