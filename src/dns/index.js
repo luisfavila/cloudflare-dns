@@ -60,6 +60,7 @@ export default function (cloudflare) {
 	}
 
 	function fromString(input) {
+		if (Array.isArray(input)) return input.map(fromString)
 		const [name, , type, ...content] = input
 			.split(' ').join(',')
 			.split('\t').join(',')
@@ -79,5 +80,5 @@ export default function (cloudflare) {
 		}
 	}
 
-	cloudflare.dns = { create, update }
+	cloudflare.dns = { create, update, fromString }
 }
