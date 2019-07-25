@@ -12,7 +12,7 @@ export default {
 			data: record.data ? {
 				algorithm: record.data.algorithm ? parseInt(record.data.algorithm, 10) : undefined,
 				type: record.data.type ? parseInt(record.data.type, 10) : undefined,
-				fingerprint: record.data.fingerprint ? parseInt(record.data.fingerprint, 10) : undefined
+				fingerprint: record.data.fingerprint
 			} : undefined
 		}
 	},
@@ -31,7 +31,7 @@ export default {
 	},
 
 	fromString(record) {
-		const parts = record.content && record.content.split('\t')
+		const parts = record.content.split('\t')
 		return {
 			...record,
 			data: parts ? {

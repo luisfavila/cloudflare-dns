@@ -67,7 +67,7 @@ export default function (cloudflare) {
 		const record = {
 			name,
 			type,
-			content: content.join(' ')
+			content: content.join('\t')
 		}
 		return getType(record).fromString(record)
 	}
