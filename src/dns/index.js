@@ -50,7 +50,7 @@ export default function (cloudflare) {
 
 	function normalize(record) {
 		if (Array.isArray(record)) return record.map(normalize)
-		if (typeof record === 'string') record = fromString(record)
+		if (typeof record === 'string') return fromString(record)
 		return getType(record).normalize(record)
 	}
 
