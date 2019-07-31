@@ -8,19 +8,24 @@
 		"lint": "eslint --ext js,jsx,json,mjs .",
 		"lint-fix": "eslint --ext js,jsx,json,mjs --fix .",
 		"start": "node -r esm .",
-		"test": "node -r esm test.js"
+		"test": "mocha -r esm tests/",
+		"coverage": "nyc --require esm mocha tests/"
 	},
 	"dependencies": {
 		"cloudflare": "^2.6.0",
 		"esm": "^3.2.25"
 	},
 	"devDependencies": {
+		"chai": "^4.2.0",
 		"eslint": "^6.1.0",
 		"eslint-config-airbnb": "^17.1.1",
 		"eslint-plugin-import": "^2.18.2",
 		"eslint-plugin-json-light": "^1.0.3",
 		"eslint-plugin-jsx-a11y": "^6.2.3",
-		"eslint-plugin-react": "^7.14.2"
+		"eslint-plugin-react": "^7.14.2",
+		"mocha": "^6.2.0",
+		"nyc": "^14.1.1"
+	},
 	"esm": {
 		"cjs": true
 	}

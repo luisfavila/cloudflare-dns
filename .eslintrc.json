@@ -34,5 +34,10 @@
 	},
 	"plugins": [
         "json-light"
-    ]
+	],
+	"env": {
+		"commonjs": true,
+		"node": true,
+		"mocha": true
+	}
 }
