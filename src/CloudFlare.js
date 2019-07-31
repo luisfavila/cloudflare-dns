@@ -1,7 +1,7 @@
-import CloudFlare from 'cloudflare'
+import CF from 'cloudflare'
 
-export default function (auth) {
-	const cloudflare = CloudFlare(auth)
+export default function CloudFlare(auth) {
+	const cloudflare = CF(auth)
 
 	cloudflare.applyPlugin = (f) => {
 		f(cloudflare)

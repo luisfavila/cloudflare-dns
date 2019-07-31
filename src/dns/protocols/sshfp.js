@@ -1,44 +1,49 @@
-export default {
-	isEqual(a, b) {
-		const first = a.content.split('\t')
-		const second = b.content.split('\t')
-		return first[0] === second[0] && first[1] === second[1]
-	},
+import Record from '../record'
 
-	normalize(record) {
+export default class SSHFP extends Record {
+	isEqual(recordTo) {
+		return super.isEqual(recordTo)
+			&& this.data && recordTo.data
+			&& this.data.type === recordTo.data.type
+			&& this.data.algorithm === recordTo.data.algorithm
+	}
+
+	static normalize(record) {
+		record = super.normalize(record)
+		record = this.normalizeContent(record)
+		return this.normalizeData(record)
+	}
+
+	static fromString(record) {
+		record = super.fromString(record)
+		return this.normalizeData(record)
+	}
+
+	static normalizeContent(record) {
+		const string = record.data && `${record.data.algorithm} ${record.data.type} ${record.data.fingerprint}`
 		return {
 			...record,
-			content: record.content ? record.content.split(' ').join('\t') : undefined,
-			data: record.data ? {
-				algorithm: record.data.algorithm ? parseInt(record.data.algorithm, 10) : undefined,
-				type: record.data.type ? parseInt(record.data.type, 10) : undefined,
-				fingerprint: record.data.fingerprint
-			} : undefined
+			content: string || record.content.split('\t').join(' ') || null
 		}
-	},
+	}
 
-	prepare(record) {
-		return {
-			...record,
-			content: record.data && !record.content ? this.toString(record) : record.content,
-			data: record.content && !record.data ? this.fromString(record) : record.data
-		}
-	},
-
-	toString(record) {
-		const string = record.data && `${record.data.algorithm}\t${record.data.type}\t${record.data.fingerprint}`
-		return string || record.content || null
-	},
-
-	fromString(record) {
-		const parts = record.content.split('\t')
-		return {
-			...record,
-			data: parts ? {
+	static normalizeData(record) {
+		const fromData = () => ({
+			algorithm: record.data.algorithm ? parseInt(record.data.algorithm, 10) : undefined,
+			type: record.data.type ? parseInt(record.data.type, 10) : undefined,
+			fingerprint: record.data.fingerprint
+		})
+		const fromContent = () => {
+			const parts = record.content.split(' ')
+			return {
 				algorithm: parseInt(parts[0], 10),
 				type: parseInt(parts[1], 10),
 				fingerprint: parts[2]
-			} : record.data
+			}
+		}
+		return {
+			...record,
+			data: record.data ? fromData() : fromContent()
 		}
 	}
 }
