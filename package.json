@@ -1,8 +1,24 @@
 {
 	"name": "cloudflare-dns",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Extended CloudFlare API",
 	"author": "Luis Ávila <me@luisavila.com",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/luisfavila/cloudflare-dns"
+	},
+	"homepage": "https://github.com/luisfavila/cloudflare-dns",
+	"bugs": {
+		"url": "https://github.com/luisfavila/cloudflare-dns/issues"
+	},
+	"license": "MIT",
+	"main": "index.js",
+	"keywords": [
+		"cloudflare",
+		"api",
+		"dns",
+		"sshfp"
+	],
 	"type": "module",
 	"scripts": {
 		"lint": "eslint --ext js,jsx,json,mjs .",
