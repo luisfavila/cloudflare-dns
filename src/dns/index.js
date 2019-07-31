@@ -35,11 +35,12 @@ export default function (cloudflare) {
 	/**
 	 * Get a record's Object representation from it's string
 	 *
-	 * @param {string} input - Record string
-	 * @returns {Object} record - The record object
+	 * @param {string|Array} input - Record string or array of record strings
+	 * @returns {Object|Array} record - Record object or array of record objects
 	 */
 	function fromString(input) {
-		const [, , type] = input.split(' ')
+		if (Array.isArray(input)) return input.map(i => fromString(i))
+		const [, , type] = input.split(' ').split('\t')
 		return getType(type).fromString(input)
 	}
 
