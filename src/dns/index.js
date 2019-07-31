@@ -1,18 +1,43 @@
 import { SSHFP, Default } from './protocols/index'
 
 export default function (cloudflare) {
+	/**
+	 * Create DNS record
+	 *
+	 * @param {string} zoneId - Cloudflare Zone ID
+	 * @param {Object|string} record - The record object or string
+	 * @param {string} record.name - The record name (example.com)
+	 * @param {string} record.type - The record type (A)
+	 * @param {string} record.content - Record content (127.0.0.1)
+	 */
 	async function create(zone, record) {
 		if (Array.isArray(record)) return Promise.all(record.map(r => create(zone, r)))
 		const normalizedRecord = normalize(record)
 		return createRecord(zone, normalizedRecord)
 	}
 
+	/**
+	 * Update existing DNS record or insert new one
+	 *
+	 * @param {string} zoneId - Cloudflare Zone ID
+	 * @param {Object|string} record - The record object or string
+	 * @param {string} record.name - The record name (example.com)
+	 * @param {string} record.type - The record type (A)
+	 * @param {string} record.content - Record content (127.0.0.1)
+	 */
 	async function update(zone, record) {
 		if (Array.isArray(record)) return Promise.all(record.map(r => update(zone, r)))
 		const normalizedRecord = normalize(record)
 		const found = await findRecord(zone, normalizedRecord)
 		return found ? updateRecord(zone, found, normalizedRecord) : createRecord(zone, normalizedRecord)
 	}
+
+	/**
+	 * Get a record's Object representation from it's string
+	 *
+	 * @param {string} input - Record string
+	 * @returns {Object} record - The record object
+	 */
 	function fromString(input) {
 		const [, , type] = input.split(' ')
 		return getType(type).fromString(input)
