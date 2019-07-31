@@ -53,8 +53,9 @@ Updates an existing record or creates a new one.
 await cf.dns.update('my-zone', record)
 ```
 **Update is tricky**: it will match existing records based on the `name` and `type` properties on most protocols. Some exceptions exist, though, where we'll need the `content` and/or `data` properties. See the following table to understand more.
-| Protocol  |  Content A  |  Content B  |  Match  |
-|---|---|---|---|---|
-| SSHFP | 1 1 123456 | 1 1 654321  | yes |
-| SSHFP | 1 1 123456 | 1 2 654321  | no |
-| SSHFP | 1 1 123456 | 2 1 654321  | no |
+
+| Protocol | Content A | Content B | Match |
+| --- | --- | --- | --- |
+| SSHFP | 1 1 123456 | 1 1 654321 | yes |
+| SSHFP | 1 1 123456 | 1 2 654321 | no |
+| SSHFP | 1 1 123456 | 2 1 654321 | no |
