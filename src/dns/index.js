@@ -40,7 +40,7 @@ export default function (cloudflare) {
 	 */
 	function fromString(input) {
 		if (Array.isArray(input)) return input.map(i => fromString(i))
-		const [, , type] = input.split(' ').split('\t')
+		const [, , type] = input.split(' ').join('\t').split('\t')
 		return getType(type).fromString(input)
 	}
 
