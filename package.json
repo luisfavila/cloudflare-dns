@@ -28,7 +28,7 @@
 		"coverage": "nyc --require esm mocha tests/"
 	},
 	"dependencies": {
-		"cloudflare": "^2.6.0",
+		"cloudflare": "^2.7.0",
 		"esm": "^3.2.25"
 	},
 	"devDependencies": {
