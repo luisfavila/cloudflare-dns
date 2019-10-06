@@ -61,8 +61,18 @@ export default function (cloudflare) {
 	}
 
 	async function findRecord(zone, record) {
-		const response = await cloudflare.dnsRecords.browse(zone, { per_page: 40 })
-		const records = normalize(response.result)
+		let info = {
+			page: 0,
+			total_pages: 1
+		}
+		const results = []
+		while (info.page < info.total_pages) {
+			/* eslint-disable-next-line */
+			const response = await cloudflare.dnsRecords.browse(zone, { type: record.type, name: record.name, per_page: 100 })
+			info = response.result_info || { page: 1, total_pages: 1 }
+			results.push(...response.result)
+		}
+		const records = normalize(results)
 		return records.find(r => record.isEqual(r))
 	}
 
