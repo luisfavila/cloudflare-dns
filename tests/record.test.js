@@ -1,6 +1,6 @@
-import { expect } from 'chai'
-import Record from '../src/dns/record'
-import CloudFlare from '../index'
+const { expect } = require('chai')
+const CloudFlare = require('../src/index')
+const Record = require('../src/dns/record')
 
 const AUTH = {}
 const cloudflare = new CloudFlare(AUTH)

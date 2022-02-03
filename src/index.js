@@ -1,4 +1,5 @@
-import CF from 'cloudflare'
+const CF = require('./Cloudflare')
+const DNS = require('./dns/index')
 
 /**
  * Constructs and returns a new Cloudflare API client with the specified authentication.
@@ -9,6 +10,7 @@ import CF from 'cloudflare'
  * @param {string} auth.key - The account API key
  * @param {string} auth.token - The API token
  *
+ * @property {DNS} dns - Extended DNS Records API
  * @property {DNSRecords} dnsRecords - DNS Records instance
  * @property {IPs} ips - IPs instance
  * @property {Zones} zones - Zones instance
@@ -17,12 +19,10 @@ import CF from 'cloudflare'
  * @property {User} user - User instance
  * @function applyPlugin - Applies a new plugin
  */
-export default function CloudFlare(auth) {
+
+module.exports = function (auth) {
 	const cloudflare = CF(auth)
-
-	cloudflare.applyPlugin = (f) => {
-		f(cloudflare)
-	}
-
+	cloudflare.applyPlugin(DNS)
 	return cloudflare
 }
+module.exports.DNS = DNS

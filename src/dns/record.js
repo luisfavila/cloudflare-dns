@@ -1,5 +1,4 @@
-
-export default class Record {
+module.exports = class Record {
 	constructor(record) {
 		Object.assign(this, this.constructor.normalize(record))
 	}
@@ -19,9 +18,11 @@ export default class Record {
 			name: this.name,
 			content: this.content
 		}
-		return Object.assign(record,
+		return Object.assign(
+			record,
 			this.id && { id: this.id },
-			this.data && { data: this.data })
+			this.data && { data: this.data }
+		)
 	}
 
 	static normalize(record) {

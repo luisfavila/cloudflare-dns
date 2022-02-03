@@ -1,7 +1,7 @@
 {
 	"name": "cloudflare-dns",
-	"version": "1.0.4",
-	"description": "Extended CloudFlare API",
+	"version": "0.0.1",
+	"description": "Extended Cloudflare API",
 	"author": "Luis Ávila <me@luisavila.com",
 	"repository": {
 		"type": "git",
@@ -12,37 +12,33 @@
 		"url": "https://github.com/luisfavila/cloudflare-dns/issues"
 	},
 	"license": "MIT",
-	"main": "index.js",
+	"main": "src/index.js",
 	"keywords": [
 		"cloudflare",
 		"api",
 		"dns",
 		"sshfp"
 	],
-	"type": "module",
+	"type": "commonjs",
 	"scripts": {
-		"lint": "eslint --ext js,jsx,json,mjs .",
-		"lint-fix": "eslint --ext js,jsx,json,mjs --fix .",
-		"start": "node -r esm .",
-		"test": "mocha -r esm tests/",
-		"coverage": "nyc --require esm mocha tests/"
+		"lint": "eslint --ext js,jsx,json .",
+		"lint-fix": "eslint --ext js,jsx,json --fix .",
+		"start": "node .",
+		"test": "mocha tests/",
+		"coverage": "nyc mocha tests/"
 	},
 	"dependencies": {
-		"cloudflare": "^2.7.0",
-		"esm": "^3.2.25"
+		"cloudflare": "^2.9.1"
 	},
 	"devDependencies": {
 		"chai": "^4.2.0",
-		"eslint": "^6.1.0",
-		"eslint-config-airbnb": "^17.1.1",
-		"eslint-plugin-import": "^2.18.2",
+		"eslint": "^8.8.0",
+		"eslint-config-airbnb": "^19.0.4",
+		"eslint-plugin-import": "^2.25.4",
 		"eslint-plugin-json-light": "^1.0.3",
-		"eslint-plugin-jsx-a11y": "^6.2.3",
-		"eslint-plugin-react": "^7.14.2",
-		"mocha": "^6.2.0",
-		"nyc": "^14.1.1"
-	},
-	"esm": {
-		"cjs": true
+		"eslint-plugin-jsx-a11y": "^6.5.1",
+		"eslint-plugin-react": "^7.28.0",
+		"mocha": "^9.2.0",
+		"nyc": "^15.1.0"
 	}
 }

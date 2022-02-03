@@ -1,6 +1,6 @@
-import { SSHFP, Default } from './protocols/index'
+const { SSHFP, Default } = require('./protocols')
 
-export default function (cloudflare) {
+module.exports = function (cloudflare) {
 	/**
 	 * Create DNS record
 	 *
@@ -11,7 +11,7 @@ export default function (cloudflare) {
 	 * @param {string} record.content - Record content (127.0.0.1)
 	 */
 	async function create(zone, record) {
-		if (Array.isArray(record)) return Promise.all(record.map(r => create(zone, r)))
+		if (Array.isArray(record)) return Promise.all(record.map((r) => create(zone, r)))
 		const normalizedRecord = normalize(record)
 		return createRecord(zone, normalizedRecord)
 	}
@@ -26,7 +26,7 @@ export default function (cloudflare) {
 	 * @param {string} record.content - Record content (127.0.0.1)
 	 */
 	async function update(zone, record) {
-		if (Array.isArray(record)) return Promise.all(record.map(r => update(zone, r)))
+		if (Array.isArray(record)) return Promise.all(record.map((r) => update(zone, r)))
 		const normalizedRecord = normalize(record)
 		const found = await findRecord(zone, normalizedRecord)
 		return found ? updateRecord(zone, found, normalizedRecord) : createRecord(zone, normalizedRecord)
@@ -39,7 +39,7 @@ export default function (cloudflare) {
 	 * @returns {Object|Array} record - Record object or array of record objects
 	 */
 	function fromString(input) {
-		if (Array.isArray(input)) return input.map(i => fromString(i))
+		if (Array.isArray(input)) return input.map((i) => fromString(i))
 		const [, , type] = input.split(' ').join('\t').split('\t')
 		return getType(type).fromString(input)
 	}
@@ -73,7 +73,7 @@ export default function (cloudflare) {
 			results.push(...response.result)
 		}
 		const records = normalize(results)
-		return records.find(r => record.isEqual(r))
+		return records.find((r) => record.isEqual(r))
 	}
 
 	function normalize(record) {

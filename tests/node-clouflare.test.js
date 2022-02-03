@@ -1,10 +1,10 @@
-import { expect } from 'chai'
-import CloudFlareAPI from 'cloudflare'
-import CloudFlare from '../index'
+const { expect } = require('chai')
+const CloudflareAPI = require('cloudflare')
+const Cloudflare = require('../src/index')
 
 const AUTH = {}
-const cloudflare = new CloudFlare(AUTH)
-const cloudflareApi = new CloudFlareAPI(AUTH)
+const cloudflare = new Cloudflare(AUTH)
+const cloudflareApi = new CloudflareAPI(AUTH)
 
 describe('Test CloudFlare API exposal', () => {
 	it('checks existance of cloudflare API', () => {

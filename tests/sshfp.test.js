@@ -1,6 +1,6 @@
-import { expect } from 'chai'
-import { SSHFP } from '../src/dns/protocols'
-import CloudFlare from '../index'
+const { expect } = require('chai')
+const SSHFP = require('../src/dns/protocols/sshfp')
+const CloudFlare = require('../src')
 
 const AUTH = {}
 const cloudflare = new CloudFlare(AUTH)

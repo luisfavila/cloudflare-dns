@@ -1,6 +1,6 @@
-import Record from '../record'
+const Record = require('../record')
 
-export default class SSHFP extends Record {
+module.exports = class SSHFP extends Record {
 	isEqual(recordTo) {
 		return super.isEqual(recordTo)
 			&& this.data && recordTo.data

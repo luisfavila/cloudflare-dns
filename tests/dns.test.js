@@ -1,6 +1,6 @@
-import { expect } from 'chai'
-import CloudFlare from '../index'
-import Record from '../src/dns/record'
+const { expect } = require('chai')
+const CloudFlare = require('../src')
+const Record = require('../src/dns/record')
 
 const AUTH = {}
 const cloudflare = new CloudFlare(AUTH)
@@ -34,7 +34,7 @@ describe('Test DNS API', () => {
 	})
 
 	describe('Test exposed functions', () => {
-		const returnResult = r => ({
+		const returnResult = (r) => ({
 			result: r,
 			succcess: true,
 			errors: [],
@@ -63,7 +63,6 @@ describe('Test DNS API', () => {
 		})
 	})
 })
-
 
 const checkDeepProperties = (props, obj) => {
 	const type = typeof props
